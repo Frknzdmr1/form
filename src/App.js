@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import FormFormik from './components/FormFormik';
+import Form from './components/Forms';
+import FormsValidation from './components/FormsValidation';
+import Home from './components/Home';
+import Navigation from './components/Navigation';
 
 function App() {
+
+  const [loggedin, setLoggedIn] = useState(false)
+
+  const login = () => { 
+    setLoggedIn(true)
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Navigation auth={ loggedin} />
+			<div class="container">
+				{/* <Form/>  */}
+        { !loggedin && <FormsValidation onLogin={ login} /> }
+        { loggedin&&<Home/>}
+				{/* <FormFormik/> */}
+			</div>
+		</div>
+	);
 }
 
 export default App;
